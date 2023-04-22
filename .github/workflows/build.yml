@@ -9,11 +9,18 @@ jobs:
     steps:
       - shell: bash
         run: |
+          export PATH="/opt/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-elf/:$PATH"
+          
+          cd /opt
+          wget http://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/aarch64-elf/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-elf.tar.xz
+          tar -xf gcc-linaro-7.5.0-2019.12-x86_64_aarch64-elf.tar.xz
+          rm -rf gcc-linaro-7.5.0-2019.12-x86_64_aarch64-elf.tar.xz
+          
           mkdir workdir
           cd workdir
         
           sudo apt-get update
-          sudo apt-get install -y wget apt-transport-https software-properties-common
+          sudo apt-get install -y wget apt-transport-https software-properties-common uuid-dev
           wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
           sudo dpkg -i packages-microsoft-prod.deb
           sudo apt-get update
